@@ -900,7 +900,7 @@ export const LESSONS = [
     ],
   },
 
-  // ── UNIT 6: Strong 2♣ Opening ─────────────────────────────────────────────
+  // ── UNIT 6: Strong Openings ───────────────────────────────────────────────
   {
     id: 'open-2c',
     unit: 'Strong Openings',
@@ -946,6 +946,327 @@ export const LESSONS = [
         correctBid: '2H',
         hint: 'With a good 5+ card suit and 8+ HCP, make a positive response showing your suit.',
         correctExplanation: 'Bid 2♥! A positive response to 2♣ shows a good 5+ card suit and 8+ HCP. KJxxxx with an outside ace qualifies perfectly. This immediately sets hearts as the potential trump suit and tells partner you have something useful. The 2♦ waiting response would also be acceptable, but 2♥ is more informative.',
+      },
+    ],
+  },
+
+  {
+    id: 'respond-2c',
+    unit: 'Strong Openings',
+    title: 'Responding to 2♣',
+    description: 'When partner opens 2♣ (game forcing), your response shapes the auction. 2♦ = artificial waiting/negative (0–7 HCP or no good suit). A positive response (2♥/2♠/3♣/3♦) shows a good 5+ card suit and 8+ HCP. After 2♦–2NT, conventional calls (Stayman, transfers) apply.',
+    convention: 'Standard American',
+    difficulty: 'Advanced',
+    scenarios: [
+      {
+        id: 'respond-2c-1',
+        // ♠ 9762  ♥ J543  ♦ 874  ♣ Q5 → 3 HCP, 4-4-3-2 — waiting 2♦
+        // HCP: JH=1,QC=2 = 3. Cards: 4+4+3+2=13 ✓
+        hand: ['9S','7S','6S','2S','JH','5H','4H','3H','8D','7D','4D','QC','5C'],
+        auction: [{ player: 'Partner', bid: '2C' }],
+        vulnerability: 'None',
+        prompt: 'Partner opened 2♣ (game forcing). You have only 3 HCP and no long suit. What is your response?',
+        correctBid: '2D',
+        hint: 'With a weak hand and no 5-card suit, use the artificial waiting response.',
+        correctExplanation: 'Bid 2♦ — the artificial waiting (negative) response. With only 3 HCP and no long suit, you cannot make a positive response. The 2♦ bid is completely artificial; it does NOT show diamonds. It simply says "I have a weak hand — please describe your hand further." You remain forced to game.',
+      },
+      {
+        id: 'respond-2c-2',
+        // ♠ KQT85  ♥ AJ3  ♦ 942  ♣ 86 → 10 HCP, 5-3-3-2 — positive 2♠
+        // HCP: KS=3,QS=2,AH=4,JH=1 = 10. Cards: 5+3+3+2=13 ✓
+        hand: ['KS','QS','TS','8S','5S','AH','JH','3H','9D','4D','2D','8C','6C'],
+        auction: [{ player: 'Partner', bid: '2C' }],
+        vulnerability: 'None',
+        prompt: 'Partner opened 2♣. You have 10 HCP with KQT85 in spades and the ace of hearts. What do you respond?',
+        correctBid: '2S',
+        hint: 'A positive response shows 8+ HCP and a good 5-card suit. Do you qualify?',
+        correctExplanation: 'Bid 2♠ — a positive response! With 10 HCP and a strong 5-card spade suit headed by KQT, you meet the requirements (8+ HCP, good 5+ card suit). The positive response immediately pinpoints your suit and tells partner you have useful values. This is far more informative than a 2♦ waiting bid.',
+      },
+      {
+        id: 'respond-2c-3',
+        // ♠ Q93  ♥ K876  ♦ J54  ♣ T32 → 6 HCP, 3-4-3-3 — raise 3♠ after 2♣-2♦-2♠
+        // HCP: QS=2,KH=3,JD=1 = 6. Cards: 3+4+3+3=13 ✓
+        hand: ['QS','9S','3S','KH','8H','7H','6H','JD','5D','4D','TC','3C','2C'],
+        auction: [
+          { player: 'Partner', bid: '2C' },
+          { player: 'You', bid: '2D' },
+          { player: 'Partner', bid: '2S' },
+        ],
+        vulnerability: 'None',
+        prompt: 'Partner opened 2♣, you responded 2♦ (waiting), and partner rebid 2♠ showing a strong spade suit. You have 6 HCP with Q93 in spades. What do you bid?',
+        correctBid: '3S',
+        hint: 'Show support for partner\'s suit — a raise is encouraging and helps define the contract.',
+        correctExplanation: 'Bid 3♠ — showing spade support! With Q93 (3-card support) and 6 HCP, you have useful values for partner. Raising to 3♠ confirms the trump suit and keeps the auction below game so partner can continue describing. Partner knows you lack a positive response (no 8-card suit) but do have a fit and some points.',
+      },
+      {
+        id: 'respond-2c-4',
+        // ♠ 742  ♥ KQJ85  ♦ 963  ♣ J4 → 7 HCP, 3-5-3-2 — bid 3♥ natural after 2♣-2♦-2NT
+        // HCP: KH=3,QH=2,JH=1,JC=1 = 7. Cards: 3+5+3+2=13 ✓
+        hand: ['7S','4S','2S','KH','QH','JH','8H','5H','9D','6D','3D','JC','4C'],
+        auction: [
+          { player: 'Partner', bid: '2C' },
+          { player: 'You', bid: '2D' },
+          { player: 'Partner', bid: '2N' },
+        ],
+        vulnerability: 'None',
+        prompt: 'Partner opened 2♣, you bid 2♦ (waiting), and partner rebid 2NT (22–24 HCP balanced). You have 7 HCP with KQJ85 in hearts. What do you bid?',
+        correctBid: '3H',
+        hint: 'Over 2NT, you can use Stayman (3♣) or transfers (3♦=hearts, 3♥=spades). Which applies here?',
+        correctExplanation: 'Bid 3♥ — a Jacoby Transfer showing 5+ hearts! Over 2NT, conventional tools apply: 3♣ = Stayman, 3♦ = transfer to hearts, 3♥ = transfer to spades. Bidding 3♦ would transfer partner to hearts. However, since this sequence shows your natural 5-card heart suit directly, bid 3♥ to place the contract in hearts. The combined 29+ HCP guarantees game.',
+      },
+    ],
+  },
+
+  {
+    id: 'rebid-2c',
+    unit: 'Strong Openings',
+    title: '2♣ Opener\'s Rebid',
+    description: 'After 2♣–2♦ (waiting), opener describes the hand precisely. 2NT = 22–24 HCP balanced. 3NT = 25–27 HCP balanced. A suit rebid = natural, showing a strong 5+ card suit, game-forcing. A two-suiter: bid the longer suit first, then show the second suit.',
+    convention: 'Standard American',
+    difficulty: 'Advanced',
+    scenarios: [
+      {
+        id: 'rebid-2c-1',
+        // ♠ AQJ4  ♥ AKJ  ♦ KQD9  ♣ Q82 → 22 HCP, 4-3-3-3 — rebid 2NT
+        // HCP: AS=4,QS=2,JS=1,AH=4,KH=3,JH=1,KD=3,QD=2,QC=2 = 22. Cards: 4+3+3+3=13 ✓
+        hand: ['AS','QS','JS','4S','AH','KH','JH','KD','QD','9D','QC','8C','2C'],
+        auction: [
+          { player: 'You', bid: '2C' },
+          { player: 'Partner', bid: '2D' },
+        ],
+        vulnerability: 'None',
+        prompt: 'You opened 2♣ and partner responded 2♦ (waiting). You have 22 HCP with a balanced 4-3-3-3 hand. What is your rebid?',
+        correctBid: '2N',
+        hint: '2NT over 2♦ shows exactly 22–24 HCP balanced. Do you fit the range?',
+        correctExplanation: 'Rebid 2NT — showing a balanced 22–24 HCP hand! With exactly 22 HCP and a flat 4-3-3-3 distribution, 2NT is the perfect descriptive rebid. Partner now knows your shape and an exact HCP range, and will use Stayman or Jacoby Transfers to find the best game (or explore slam if they have points).',
+      },
+      {
+        id: 'rebid-2c-2',
+        // ♠ AKQT  ♥ AKJ  ♦ AQ7  ♣ KJ2 → 26 HCP, 4-3-3-3 — rebid 3NT
+        // HCP: AS=4,KS=3,QS=2,AH=4,KH=3,JH=1,AD=4,QD=2,KC=3,JC=1 = 27. Cards: 4+3+3+3=13
+        // Adjusted: ♠ AKQ4  ♥ AK3  ♦ AQ7  ♣ KJ2 → HCP: 4+3+2+4+3+4+2+3+1 = 26 ✓
+        hand: ['AS','KS','QS','4S','AH','KH','3H','AD','QD','7D','KC','JC','2C'],
+        auction: [
+          { player: 'You', bid: '2C' },
+          { player: 'Partner', bid: '2D' },
+        ],
+        vulnerability: 'None',
+        prompt: 'You opened 2♣ and partner responded 2♦. You have 26 HCP with a 4-3-3-3 balanced hand. What is your rebid?',
+        correctBid: '3N',
+        hint: '2NT = 22–24. 3NT = 25–27. Which range fits your 26 HCP hand?',
+        correctExplanation: 'Rebid 3NT — showing 25–27 HCP balanced! The 3NT rebid after 2♣–2♦ is a precise description: balanced hand with 25–27 HCP. Partner now knows your strength to within 2 points. With any positive values, partner will explore slam — even 4–5 HCP opposite 26 puts you near 30 total, enough for a small slam.',
+      },
+      {
+        id: 'rebid-2c-3',
+        // ♠ AK  ♥ AKQJT6  ♦ K9  ♣ Q87 → 22 HCP, 2-6-2-3 — rebid 2♥ (natural)
+        // HCP: AS=4,KS=3,AH=4,KH=3,QH=2,JH=1,KD=3,QC=2 = 22. Cards: 2+6+2+3=13 ✓
+        hand: ['AS','KS','AH','KH','QH','JH','TH','6H','KD','9D','QC','8C','7C'],
+        auction: [
+          { player: 'You', bid: '2C' },
+          { player: 'Partner', bid: '2D' },
+        ],
+        vulnerability: 'None',
+        prompt: 'You opened 2♣ and partner responded 2♦. You have 22 HCP with a powerful 6-card heart suit (AKQJT6). What is your natural rebid?',
+        correctBid: '2H',
+        hint: 'With a strong one-suited hand, rebid your suit at the lowest level. The auction is already game-forcing.',
+        correctExplanation: 'Rebid 2♥ — naturally showing your 6-card heart suit! After 2♣–2♦, any suit rebid is natural and game-forcing. You don\'t need to jump — just bid 2♥ to show hearts at the cheapest level. Partner will show support, bid a stopper for NT, or continue describing. Your massive 6-card suit will drive to game or slam.',
+      },
+      {
+        id: 'rebid-2c-4',
+        // ♠ AKQJ  ♥ AKQJ  ♦ K9  ♣ 852 → 23 HCP, 4-4-2-3 — rebid 2♥ (longer / higher-ranking suit first)
+        // HCP: AS=4,KS=3,QS=2,JS=1,AH=4,KH=3,QH=2,JH=1,KD=3 = 23. Cards: 4+4+2+3=13 ✓
+        hand: ['AS','KS','QS','JS','AH','KH','QH','JH','KD','9D','8C','5C','2C'],
+        auction: [
+          { player: 'You', bid: '2C' },
+          { player: 'Partner', bid: '2D' },
+        ],
+        vulnerability: 'None',
+        prompt: 'You opened 2♣ and partner responded 2♦. You have 23 HCP with 4 solid spades (AKQJ) and 4 solid hearts (AKQJ). You want to show both majors. What do you rebid first?',
+        correctBid: '2H',
+        hint: 'With two equal-length suits, bid the higher-ranking suit first when going up the ladder (hearts before spades).',
+        correctExplanation: 'Rebid 2♥ first! With two 4-card major suits of equal length, bridge bidding technique says to bid the lower-ranking one first (hearts) when they are of equal length. This leaves room to show 2♠ on the next round. If you bid 2♠ first, you can\'t show hearts cheaply without forcing to a higher level. Hearts first, then spades paints the full picture efficiently.',
+      },
+    ],
+  },
+
+  {
+    id: 'weak-twos',
+    unit: 'Strong Openings',
+    title: 'Weak Two Bids',
+    description: 'A weak two bid (2♥ or 2♠) is a preemptive opening showing a 6-card suit and roughly 5–11 HCP (typically 6–10). The Rule of 2-3: not vulnerable, don\'t open if you\'d go down 3+; vulnerable, don\'t go down 2+. Suit quality matters: ideally 2 of the top 3 honours.',
+    convention: 'Standard American',
+    difficulty: 'Advanced',
+    scenarios: [
+      {
+        id: 'weak-twos-1',
+        // ♠ KQT987  ♥ 53  ♦ J84  ♣ Q6 → 8 HCP, 6-2-3-2 — open 2♠
+        // HCP: KS=3,QS=2,JD=1,QC=2 = 8. Cards: 6+2+3+2=13 ✓
+        hand: ['KS','QS','TS','9S','8S','7S','5H','3H','JD','8D','4D','QC','6C'],
+        auction: [],
+        vulnerability: 'None',
+        prompt: 'You are dealer, not vulnerable. You have 8 HCP with KQT987 in spades and a scattered side suit. What do you open?',
+        correctBid: '2S',
+        hint: 'A 6-card suit headed by two of the top honours with 6–10 HCP is a classic weak two bid.',
+        correctExplanation: 'Open 2♠ — a textbook weak two! You have 8 HCP, a 6-card spade suit headed by KQT (two of the top honours), and a weak hand outside. The weak 2♠ preempts your opponents from finding their best contract, uses up two levels of bidding space, and describes your hand precisely to partner in one bid.',
+      },
+      {
+        id: 'weak-twos-2',
+        // ♠ 84  ♥ KQJ876  ♦ 952  ♣ J4 → 7 HCP, 2-6-3-2 — open 2♥
+        // HCP: KH=3,QH=2,JH=1,JC=1 = 7. Cards: 2+6+3+2=13 ✓
+        hand: ['8S','4S','KH','QH','JH','8H','7H','6H','9D','5D','2D','JC','4C'],
+        auction: [],
+        vulnerability: 'None',
+        prompt: 'You are dealer, not vulnerable. You have 7 HCP with KQJ876 in hearts. What is your opening bid?',
+        correctBid: '2H',
+        hint: 'KQJxxx is a very good 6-card suit for a preemptive opening. How many HCP do you need?',
+        correctExplanation: 'Open 2♥ — an excellent weak two! KQJ876 is a quality 6-card suit (three of the top honours), and 7 HCP is in the ideal range. The preempt makes it very difficult for opponents to find a major-suit fit or start at the one-level. You\'ve also told partner exactly what to expect: a 6-card heart suit with some solidity but limited outside values.',
+      },
+      {
+        id: 'weak-twos-3',
+        // ♠ AKQT87  ♥ 85  ♦ KJ4  ♣ 73 → 13 HCP, 6-2-3-2 — must open 1♠ (too strong for weak 2)
+        // HCP: AS=4,KS=3,QS=2,KD=3,JD=1 = 13. Cards: 6+2+3+2=13 ✓
+        hand: ['AS','KS','QS','TS','8S','7S','8H','5H','KD','JD','4D','7C','3C'],
+        auction: [],
+        vulnerability: 'None',
+        prompt: 'You are dealer. You have a powerful 6-card spade suit (AKQT87) but 13 HCP and a side king. Is this hand right for a Weak 2♠ opening?',
+        correctBid: '1S',
+        hint: 'Weak two bids cap out at roughly 10–11 HCP. What do you open with 13 HCP?',
+        correctExplanation: 'Open 1♠ — this hand is far too strong for a weak two bid! With 13 HCP and game potential, opening 2♠ would severely mislead partner who will pass expecting a weak hand. A weak two is capped at roughly 10–11 HCP. Open 1♠ and rebid powerfully — your 6-card suit and values will tell the story over multiple rounds of bidding.',
+      },
+      {
+        id: 'weak-twos-4',
+        // ♠ 93  ♥ KQT985  ♦ A64  ♣ 72 → 9 HCP, 2-6-3-2 — open 2♥ (good suit + outside ace)
+        // HCP: KH=3,QH=2,AD=4 = 9. Cards: 2+6+3+2=13 ✓
+        hand: ['9S','3S','KH','QH','TH','9H','8H','5H','AD','6D','4D','7C','2C'],
+        auction: [],
+        vulnerability: 'Both',
+        prompt: 'You are dealer, vulnerable. You have 9 HCP with KQT985 in hearts and the ace of diamonds. What do you open?',
+        correctBid: '2H',
+        hint: 'Vulnerable preempts demand good suits. Does KQT985 qualify?',
+        correctExplanation: 'Open 2♥ — this qualifies even vulnerable! The heart suit KQT985 is excellent quality (KQ at the top, 6 cards). The outside ace reduces the risk of a big penalty if doubled. At 9 HCP with a solid 6-card major, this is a sound vulnerable weak two. You\'re telling partner: "6 hearts, about 9 HCP, not much outside." Partner can raise to 4♥ with the right hand.',
+      },
+    ],
+  },
+
+  {
+    id: 'respond-weak-twos',
+    unit: 'Strong Openings',
+    title: 'Responding to Weak Twos',
+    description: 'Responding to partner\'s weak two: Raise to 3 = competitive/preemptive (not inviting game). Raise to 4 = game, to play. 2NT = artificial asking bid (feature asking or Ogust: asks opener to describe suit quality and hand strength). New suit = forcing — showing your own good suit. Pass = best in most other cases.',
+    convention: 'Standard American',
+    difficulty: 'Advanced',
+    scenarios: [
+      {
+        id: 'respond-weak-twos-1',
+        // ♠ AQ84  ♥ K93  ♦ Q86  ♣ AJ5 → 16 HCP, 4-3-3-3 — raise to 4♥ (game with Kxx support)
+        // HCP: AS=4,QS=2,KH=3,QD=2,AC=4,JC=1 = 16. Cards: 4+3+3+3=13 ✓
+        hand: ['AS','QS','8S','4S','KH','9H','3H','QD','8D','6D','AC','JC','5C'],
+        auction: [{ player: 'Partner', bid: '2H' }],
+        vulnerability: 'None',
+        prompt: 'Partner opened 2♥. You have 16 HCP with K93 in hearts. What do you respond?',
+        correctBid: '4H',
+        hint: 'You have 3-card heart support and 16 HCP. Assuming partner has 6–10 HCP, how many total points does the partnership hold?',
+        correctExplanation: 'Bid 4♥ — go straight to game! With 16 HCP and Kxx in partner\'s suit, the partnership has 22–26 HCP total. That\'s game-going values. The K93 gives you a 9-card heart fit. Don\'t invite with 3♥ (that would be preemptive) — instead, bid game directly. If partner has 10 HCP you\'re even in slam range, but 4♥ is the safe practical bid.',
+      },
+      {
+        id: 'respond-weak-twos-2',
+        // ♠ KQ7  ♥ AKJH8  ♦ AQ4  ♣ J86 → 20 HCP, 3-4-3-3 — raise partner's 2♠ to 4♠
+        // HCP: KS=3,QS=2,AH=4,KH=3,JH=1,AD=4,QD=2,JC=1 = 20. Cards: 3+4+3+3=13 ✓
+        hand: ['KS','QS','7S','AH','KH','JH','8H','AD','QD','4D','JC','8C','6C'],
+        auction: [{ player: 'Partner', bid: '2S' }],
+        vulnerability: 'None',
+        prompt: 'Partner opened 2♠. You have 20 HCP with KQ7 in spades. What do you respond?',
+        correctBid: '4S',
+        hint: 'You have 3-card support and 20 HCP. The partnership total is 26–30. What contract does that suggest?',
+        correctExplanation: 'Bid 4♠ — game is a certainty! With 20 HCP and KQ7 (excellent 3-card support for partner\'s 6-card spade suit), the partnership holds 26–30 HCP — easily enough for game. Bid 4♠ directly. You might even have slam if partner is at the top of their range, but without knowing partner\'s exact holding, 4♠ is the practical limit bid.',
+      },
+      {
+        id: 'respond-weak-twos-3',
+        // ♠ K72  ♥ QT85  ♦ 963  ♣ AC84 → 9 HCP, 3-4-3-3 — preemptive raise to 3♥
+        // HCP: KS=3,QH=2,AC=4 = 9. Cards: 3+4+3+3=13 ✓
+        hand: ['KS','7S','2S','QH','TH','8H','5H','9D','6D','3D','AC','8C','4C'],
+        auction: [{ player: 'Partner', bid: '2H' }],
+        vulnerability: 'None',
+        prompt: 'Partner opened 2♥. You have 9 HCP with 4-card heart support (QT85) and the ace of clubs. RHO passes. What do you bid?',
+        correctBid: '3H',
+        hint: 'A raise to 3 over a weak two is preemptive — it uses up bidding space and shows support but not enough for game.',
+        correctExplanation: 'Bid 3♥ — a preemptive raise! With 9 HCP and 4-card heart support you\'re not strong enough to bid game (that would require about 15+ HCP). Instead, raise to 3♥ to make life hard for the opponents. A 3♥ raise shows a distributional raise with heart support, NOT an invitation to game. It\'s competitive — you\'re consuming their bidding space while showing a good fit.',
+      },
+      {
+        id: 'respond-weak-twos-4',
+        // ♠ AQ5  ♥ AKJ4  ♦ K83  ♣ Q96 → 19 HCP, 3-4-3-3 — bid 2NT (Ogust/feature asking)
+        // HCP: AS=4,QS=2,AH=4,KH=3,JH=1,KD=3,QC=2 = 19. Cards: 3+4+3+3=13 ✓
+        hand: ['AS','QS','5S','AH','KH','JH','4H','KD','8D','3D','QC','9C','6C'],
+        auction: [{ player: 'Partner', bid: '2S' }],
+        vulnerability: 'None',
+        prompt: 'Partner opened 2♠. You have 19 HCP with AQ5 in spades. You want to know whether partner has a solid suit and where their values are before committing to slam. What do you bid?',
+        correctBid: '2N',
+        hint: '2NT over a weak two is an artificial asking bid — it asks opener to describe their suit quality and hand type.',
+        correctExplanation: 'Bid 2NT — the Ogust (feature asking) convention! With 19 HCP, slam is possible if partner has the top end (9–10 HCP) of their weak two range. Rather than guess, use 2NT to ask: opener responds 3♣ (bad suit, minimum), 3♦ (good suit, minimum), 3♥ (bad suit, maximum), 3♠ (good suit, maximum), or 3NT (top two honours in suit). This lets you place the final contract with confidence.',
+      },
+    ],
+  },
+
+  {
+    id: 'jump-shifts',
+    unit: 'Strong Openings',
+    title: 'Strong Jump Shifts',
+    description: 'A jump shift in response to partner\'s opening bid (e.g., 1♥–2♠, 1♣–3♦) shows a very strong hand of 17+ HCP with a good 5+ card suit. It is unconditionally game-forcing. Opener must not pass. Jump shifts set up slam investigation by showing strength and suit in one bid.',
+    convention: 'Standard American',
+    difficulty: 'Advanced',
+    scenarios: [
+      {
+        id: 'jump-shifts-1',
+        // ♠ AKQJ5  ♥ K4  ♦ AQ6  ♣ J84 → 20 HCP, 5-2-3-3 — jump to 2♠ after 1♦
+        // HCP: AS=4,KS=3,QS=2,JS=1,KH=3,AD=4,QD=2,JC=1 = 20. Cards: 5+2+3+3=13 ✓
+        hand: ['AS','KS','QS','JS','5S','KH','4H','AD','QD','6D','JC','8C','4C'],
+        auction: [{ player: 'Partner', bid: '1D' }],
+        vulnerability: 'None',
+        prompt: 'Partner opened 1♦. You have 20 HCP with AKQJ5 in spades. What do you respond?',
+        correctBid: '2S',
+        hint: 'A jump response in a new suit (skipping a level) is a strong jump shift — game-forcing with 17+ HCP.',
+        correctExplanation: 'Bid 2♠ — a strong jump shift! A simple 1♠ response would work, but with 20 HCP and a self-sufficient spade suit, a jump to 2♠ tells partner immediately that game is certain and slam is possible. The jump shift is unconditionally game-forcing; opener cannot pass. It announces: "I have 17+ HCP and a strong suit — let\'s explore where to play."',
+      },
+      {
+        id: 'jump-shifts-2',
+        // ♠ K74  ♥ AKQ86  ♦ AJ5  ♣ Q3 → 20 HCP, 3-5-3-2 — jump to 3♥ after 1♣
+        // HCP: KS=3,AH=4,KH=3,QH=2,AD=4,JD=1,QC=2 = 19 HCP. Cards: 3+5+3+2=13 ✓
+        hand: ['KS','7S','4S','AH','KH','QH','8H','6H','AD','JD','5D','QC','3C'],
+        auction: [{ player: 'Partner', bid: '1C' }],
+        vulnerability: 'None',
+        prompt: 'Partner opened 1♣. You have 19 HCP with AKQ86 in hearts. What do you respond to set a game-forcing auction?',
+        correctBid: '2H',
+        hint: 'A jump shift skips one level. What is the cheapest jump response in hearts after 1♣?',
+        correctExplanation: 'Bid 2♥ — the strong jump shift! After 1♣, a simple 1♥ response is possible but undersells your 19 HCP hand. Jumping to 2♥ (skipping over 1♥) announces slam interest immediately. With AKQ86 in hearts and 19 HCP, there may be 12 tricks available if partner has fitting cards. The jump shift ensures you won\'t stop short of game and keeps slam on the table.',
+      },
+      {
+        id: 'jump-shifts-3',
+        // ♠ AJ3  ♥ KQ5  ♦ AKJT6  ♦ Q4 — wait, duplicate suit. Use:
+        // ♠ AJ3  ♥ KQ5  ♦ AKJT6  ♣ Q4 → HCP: AS=4,JS=1,KH=3,QH=2,AD=4,KD=3,JD=1,QC=2 = 20. Cards: 3+3+5+2=13 ✓
+        hand: ['AS','JS','3S','KH','QH','5H','AD','KD','JD','TD','6D','QC','4C'],
+        auction: [{ player: 'Partner', bid: '1H' }],
+        vulnerability: 'None',
+        prompt: 'Partner opened 1♥. You have 20 HCP with a strong 5-card diamond suit (AKJT6). How do you show your hand\'s strength with a game-forcing response?',
+        correctBid: '3D',
+        hint: 'A jump in a new suit at the 3-level shows a strong hand and a self-sufficient suit — the strong jump shift.',
+        correctExplanation: 'Bid 3♦ — a jump shift showing diamonds! After 1♥, bidding 2♦ would be a simple change of suit (forcing but not necessarily slam-level). Jumping to 3♦ shows 17+ HCP and a strong diamond suit — this is a slam try in disguise. Partner now knows you have big values and a solid diamond suit. Together you can explore 3NT, 4♥ (with a heart fit), 5♦, or 6♦ comfortably.',
+      },
+      {
+        id: 'jump-shifts-4',
+        // After jump shift, partner raises — you can now launch RKCB
+        // ♠ AKQ98  ♥ A4  ♦ KJ5  ♣ Q72 → 20 HCP, 5-2-3-3
+        // HCP: AS=4,KS=3,QS=2,AH=4,KD=3,JD=1,QC=2 = 19. Cards: 5+2+3+3=13 ✓
+        hand: ['AS','KS','QS','9S','8S','AH','4H','KD','JD','5D','QC','7C','2C'],
+        auction: [
+          { player: 'Partner', bid: '1C' },
+          { player: 'You', bid: '2S' },
+          { player: 'Partner', bid: '3S' },
+        ],
+        vulnerability: 'None',
+        prompt: 'You jump-shifted to 2♠ over partner\'s 1♣, and partner raised to 3♠ (showing spade support and values). You have 19 HCP with AKQJ98 in spades. How do you continue toward slam?',
+        correctBid: '4N',
+        hint: 'Partner has shown spade support and a decent hand. With 19 HCP and a strong 5-card suit, what slam-investigation tool applies?',
+        correctExplanation: 'Bid 4NT — Roman Keycard Blackwood (RKCB)! Partner\'s 3♠ raise confirms the spade fit and good values (likely 14–16+ HCP for a raise after your jump shift). Together you may have 33–35 HCP — excellent slam material. Launch RKCB (4NT) to ask for aces and the king of trumps. If partner shows 2 keycards + the ♠Q, bid 6♠ confidently.',
       },
     ],
   },

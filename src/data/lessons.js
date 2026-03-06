@@ -458,6 +458,317 @@ export const LESSONS = [
     ],
   },
 
+  {
+    id: 'respond-overcall',
+    unit: 'Competitive Bidding',
+    title: 'Responding to Partner\'s Overcall',
+    description: 'After partner overcalls, support their suit or show your own. A simple raise (2M) = 3-card support + 8–10 HCP. A jump raise (3M) = 3-card support + 11–13 HCP, invitational. A new suit = natural and forcing. With 14+ HCP and a fit, bid game directly.',
+    convention: 'Standard American',
+    difficulty: 'Intermediate',
+    scenarios: [
+      {
+        id: 'respond-overcall-1',
+        // ♠ Q73  ♥ K85  ♦ A964  ♣ 852 → 9 HCP, 3-3-4-3 — raise to 2♠
+        // HCP: QS=2,KH=3,AD=4 = 9. Cards: 3+3+4+3=13 ✓
+        hand: ['QS','7S','3S','KH','8H','5H','AD','9D','6D','4D','8C','5C','2C'],
+        auction: [{ player: 'Opp', bid: '1H' }, { player: 'Partner', bid: '1S' }],
+        vulnerability: 'None',
+        prompt: 'RHO opened 1♥ and partner overcalled 1♠. You have 9 HCP with Q73 in spades. How do you support partner?',
+        correctBid: '2S',
+        hint: 'With 3-card support and 8–10 HCP, a simple raise is the right action.',
+        correctExplanation: 'Raise to 2♠! With Q73 (3-card support) and 9 HCP, a simple raise to 2♠ is perfect. It shows: 3+ spade support and 8–10 HCP. This keeps the auction competitive while telling partner exactly what you have. A simple raise is constructive and shows some values — not just 3 small.',
+      },
+      {
+        id: 'respond-overcall-2',
+        // ♠ KJ5  ♥ 83  ♦ AQ64  ♣ J974 → 11 HCP, 3-2-4-4 — jump to 3♠ (invitational)
+        // HCP: KS=3,JS=1,AD=4,QD=2,JC=1 = 11. Cards: 3+2+4+4=13 ✓
+        hand: ['KS','JS','5S','8H','3H','AD','QD','6D','4D','JC','9C','7C','4C'],
+        auction: [{ player: 'Opp', bid: '1H' }, { player: 'Partner', bid: '1S' }],
+        vulnerability: 'None',
+        prompt: 'RHO opened 1♥ and partner overcalled 1♠. You have 11 HCP with KJ5 in spades. How do you show your invitational values?',
+        correctBid: '3S',
+        hint: 'With 3-card support and 11–13 HCP, you\'re too strong for a simple raise but not enough for game. What jump shows this?',
+        correctExplanation: 'Jump to 3♠ — an invitational raise! With 11 HCP and KJ5 in spades, you are too strong for 2♠ (8–10) but not quite enough to force game. The jump to 3♠ says: "Partner, I have 11–13 HCP and 3-card support — bid 4♠ if you have any extras." Partner decides; a minimum overcall (8–11 HCP) usually passes.',
+      },
+      {
+        id: 'respond-overcall-3',
+        // ♠ Q76  ♥ 3  ♦ 854  ♣ AKQJ62 → 12 HCP, 3-1-3-6 — bid 2♣ (natural, own suit)
+        // HCP: QS=2,AC=4,KC=3,QC=2,JC=1 = 12. Cards: 3+1+3+6=13 ✓
+        hand: ['QS','7S','6S','3H','8D','5D','4D','AC','KC','QC','JC','6C','2C'],
+        auction: [{ player: 'Opp', bid: '1H' }, { player: 'Partner', bid: '1S' }],
+        vulnerability: 'None',
+        prompt: 'RHO opened 1♥ and partner overcalled 1♠. You have 12 HCP but only a 3-card spade fit. You have a powerful 6-card club suit (AKQJ62). What do you bid?',
+        correctBid: '2C',
+        hint: 'With a strong 6-card suit of your own and little spade support, you can bid your suit naturally.',
+        correctExplanation: 'Bid 2♣ — your own powerful suit! When you have a strong 6-card suit and limited support for partner\'s overcall, bidding your suit is correct. 2♣ here is natural and forcing (new suit by responder). This describes your hand accurately — a huge club suit with some outside values — and lets partner place the contract in clubs, spades, or NT.',
+      },
+      {
+        id: 'respond-overcall-4',
+        // ♠ AQ94  ♥ K5  ♦ AJ83  ♣ 762 → 14 HCP, 4-2-4-3 — bid 4♠ (direct game)
+        // HCP: AS=4,QS=2,KH=3,AD=4,JD=1 = 14. Cards: 4+2+4+3=13 ✓
+        hand: ['AS','QS','9S','4S','KH','5H','AD','JD','8D','3D','7C','6C','2C'],
+        auction: [{ player: 'Opp', bid: '1H' }, { player: 'Partner', bid: '1S' }],
+        vulnerability: 'None',
+        prompt: 'RHO opened 1♥ and partner overcalled 1♠. You have 14 HCP with AQ94 in spades and an outside ace. What do you bid?',
+        correctBid: '4S',
+        hint: 'With 14 HCP and 4-card support for partner\'s overcall, is game warranted?',
+        correctExplanation: 'Bid 4♠ — go to game directly! With 14 HCP and AQ94 (excellent 4-card spade support), you have enough to bid game regardless of partner\'s range (8–17 HCP). Even if partner has a minimum overcall (8–9 HCP), you likely have the combined values for game (22–23). Take charge and bid what you can make.',
+      },
+    ],
+  },
+
+  {
+    id: 'respond-tdbl',
+    unit: 'Competitive Bidding',
+    title: 'Responding to Takeout Double',
+    description: 'After partner doubles for takeout, YOU MUST BID (unless RHO bids). With 0–8 HCP: bid your best suit at the lowest level. With 9–11 HCP: jump one level in your suit. With 12+ HCP: jump to game or cue-bid. With a stopper in their suit and no suit: bid NT.',
+    convention: 'Standard American',
+    difficulty: 'Intermediate',
+    scenarios: [
+      {
+        id: 'respond-tdbl-1',
+        // ♠ 742  ♥ Q965  ♦ 83  ♣ J764 → 3 HCP, 3-4-2-4 — bid 1♥ (minimum forced bid)
+        // HCP: QH=2,JC=1 = 3. Cards: 3+4+2+4=13 ✓
+        hand: ['7S','4S','2S','QH','9H','6H','5H','8D','3D','JC','7C','6C','4C'],
+        auction: [{ player: 'Opp', bid: '1D' }, { player: 'Partner', bid: 'X' }],
+        vulnerability: 'None',
+        prompt: 'LHO opened 1♦ and partner doubled for takeout. RHO passed. You have only 3 HCP. You MUST bid — what do you say?',
+        correctBid: '1H',
+        hint: 'You must bid your longest unbid suit at the lowest level, even with 0 HCP.',
+        correctExplanation: 'Bid 1♥ — your 4-card heart suit at the cheapest level. After partner\'s takeout double you are forced to bid, even with zero points. Partner knows your minimum bid could be a bust hand — they will not punish you. Show your longest suit (4-card hearts beats 3-card spades) at the cheapest available level.',
+      },
+      {
+        id: 'respond-tdbl-2',
+        // ♠ KJ84  ♥ Q72  ♦ J53  ♣ A76 → 11 HCP, 4-3-3-3 — jump to 2♠ (showing values)
+        // HCP: KS=3,JS=1,QH=2,JD=1,AC=4 = 11. Cards: 4+3+3+3=13 ✓
+        hand: ['KS','JS','8S','4S','QH','7H','2H','JD','5D','3D','AC','7C','6C'],
+        auction: [{ player: 'Opp', bid: '1H' }, { player: 'Partner', bid: 'X' }],
+        vulnerability: 'None',
+        prompt: 'LHO opened 1♥ and partner doubled for takeout. You have 11 HCP with KJ84 in spades. How do you show your extra values?',
+        correctBid: '2S',
+        hint: 'A minimum response (1♠) shows 0–8 HCP. A jump response shows extra values. Which range are you in?',
+        correctExplanation: 'Jump to 2♠ — showing 9–11 HCP! After a takeout double, a jump response (skipping one level) shows 9–11 HCP and a good suit. With 11 HCP and KJ84, you are too strong to bid just 1♠ (which would suggest 0–8 HCP). The jump invites partner to bid game with any extras. Partner with 16+ will bid 4♠.',
+      },
+      {
+        id: 'respond-tdbl-3',
+        // ♠ J73  ♥ AJ8  ♦ KQ54  ♣ 972 → 11 HCP, 3-3-4-3 — bid 1NT (stopper in their suit)
+        // HCP: JS=1,AH=4,JH=1,KD=3,QD=2 = 11. Cards: 3+3+4+3=13 ✓
+        hand: ['JS','7S','3S','AH','JH','8H','KD','QD','5D','4D','9C','7C','2C'],
+        auction: [{ player: 'Opp', bid: '1C' }, { player: 'Partner', bid: 'X' }],
+        vulnerability: 'None',
+        prompt: 'LHO opened 1♣ and partner doubled for takeout. You have 11 HCP with AJ8 in clubs (their suit). No 4-card major. What do you bid?',
+        correctBid: '1N',
+        hint: 'With a stopper in their suit and no 4-card major, NT is descriptive. How many HCP = 1NT response?',
+        correctExplanation: 'Bid 1NT — showing 6–10 HCP and a club stopper! With AJ8 in clubs (a stopper in their suit), no biddable 4-card major, and 11 HCP, 1NT is the right call. It says "I have a balanced hand with their suit stopped." Note: a 2NT response shows 11–12 HCP. Here, 11 HCP with no 4-card major is a textbook 1NT response after a takeout double.',
+      },
+      {
+        id: 'respond-tdbl-4',
+        // ♠ KQ6  ♥ AJ8  ♦ Q954  ♣ J72 → 13 HCP, 3-3-4-3 — bid 3NT (game, stopper)
+        // HCP: KS=3,QS=2,AH=4,JH=1,QD=2,JC=1 = 13. Cards: 3+3+4+3=13 ✓
+        hand: ['KS','QS','6S','AH','JH','8H','QD','9D','5D','4D','JC','7C','2C'],
+        auction: [{ player: 'Opp', bid: '1C' }, { player: 'Partner', bid: 'X' }],
+        vulnerability: 'None',
+        prompt: 'LHO opened 1♣ and partner doubled for takeout. You have 13 HCP with balanced shape and JC72 (a club stopper). What do you bid?',
+        correctBid: '3N',
+        hint: 'With 13+ HCP and a stopper in their suit, you have enough for game. Jump directly.',
+        correctExplanation: 'Bid 3NT — direct game! With 13 HCP, a club stopper (J72 is enough with partner\'s values), and balanced shape, there is no reason to invite. Jump straight to 3NT. You have at minimum 26 combined HCP (partner\'s double suggests 13+), which is the threshold for game. A 2NT bid would only invite — be confident and bid game.',
+      },
+    ],
+  },
+
+  {
+    id: 'neg-dbl',
+    unit: 'Competitive Bidding',
+    title: 'Negative Doubles',
+    description: 'After partner opens and RHO overcalls, a double is NEGATIVE (takeout) — it shows unbid suits, especially the unbid major(s). Over a 1♠ overcall: double shows 4+ hearts. Over a 1♥ overcall: double shows 4 spades (with 5+ you bid 1♠ naturally). Requires 7+ HCP.',
+    convention: 'Negative Doubles',
+    difficulty: 'Intermediate',
+    scenarios: [
+      {
+        id: 'neg-dbl-1',
+        // ♠ 83  ♥ KJ74  ♦ AQ52  ♣ 974 → 10 HCP, 2-4-4-3 — double (shows hearts) after 1♦-1♠
+        // HCP: KH=3,JH=1,AD=4,QD=2 = 10. Cards: 2+4+4+3=13 ✓
+        hand: ['8S','3S','KH','JH','7H','4H','AD','QD','5D','2D','9C','7C','4C'],
+        auction: [{ player: 'Partner', bid: '1D' }, { player: 'Opp', bid: '1S' }],
+        vulnerability: 'None',
+        prompt: 'Partner opened 1♦ and RHO overcalled 1♠. You have 10 HCP with 4 hearts (KJ74) but no 5-card suit. You can\'t bid 1♥ — what do you do?',
+        correctBid: 'X',
+        hint: 'After 1♦–1♠, a double is negative and shows 4+ hearts. It says "I have the unbid major, partner."',
+        correctExplanation: 'Double — a negative double showing hearts! After 1♦–1♠, you can no longer bid 1♥ naturally (the overcall blocked you). The negative double solves this: it shows 4+ hearts (the unbid major) and 7+ HCP. Partner will bid hearts if they have 4, bid NT with a spade stopper, or support your diamonds. It\'s as descriptive as a 1♥ bid would have been.',
+      },
+      {
+        id: 'neg-dbl-2',
+        // ♠ KJ74  ♥ Q965  ♦ 83  ♣ J52 → 7 HCP, 4-4-2-3 — double (shows both majors) after 1♣-1♦
+        // HCP: KS=3,JS=1,QH=2,JC=1 = 7. Cards: 4+4+2+3=13 ✓
+        hand: ['KS','JS','7S','4S','QH','9H','6H','5H','8D','3D','JC','5C','2C'],
+        auction: [{ player: 'Partner', bid: '1C' }, { player: 'Opp', bid: '1D' }],
+        vulnerability: 'None',
+        prompt: 'Partner opened 1♣ and RHO overcalled 1♦. You have 7 HCP with 4 spades (KJ74) and 4 hearts (Q965). How do you show both majors?',
+        correctBid: 'X',
+        hint: 'After 1♣–1♦, a negative double promises 4 cards in BOTH majors. It\'s the perfect descriptor for a 4-4 major hand.',
+        correctExplanation: 'Double — showing both majors! After 1♣–1♦, the two unbid suits are hearts and spades. A negative double promises exactly 4 cards in each major (or 5-4 with the 5-card suit not biddable). Partner will pick the major that fits best: 1♥ with 4 hearts, 1♠ with 4 spades, or 1NT with no major. This is far more efficient than bidding one major and missing the other.',
+      },
+      {
+        id: 'neg-dbl-3',
+        // ♠ KQ94  ♥ 73  ♦ J52  ♣ AJ84 → 11 HCP, 4-2-3-4 — double (shows 4 spades) after 1♥-2♦
+        // HCP: KS=3,QS=2,JD=1,AC=4,JC=1 = 11. Cards: 4+2+3+4=13 ✓
+        hand: ['KS','QS','9S','4S','7H','3H','JD','5D','2D','AC','JC','8C','4C'],
+        auction: [{ player: 'Partner', bid: '1H' }, { player: 'Opp', bid: '2D' }],
+        vulnerability: 'None',
+        prompt: 'Partner opened 1♥ and RHO overcalled 2♦. You have 11 HCP with exactly 4 spades (KQ94). How do you show your spades at this level?',
+        correctBid: 'X',
+        hint: 'With exactly 4 spades after a 2♦ overcall, a double is negative — it shows spades without committing to 2♠.',
+        correctExplanation: 'Double — negative, showing spades! At the 2-level, bidding 2♠ naturally would require 5+ spades (since you\'re committing the auction higher). With exactly 4 spades, use the negative double instead. It shows 4+ spades and enough values to compete. Partner bids 2♠ with 3-card spade support, or bids 3♥ to show a solid heart suit. Both outcomes place you in a good contract.',
+      },
+      {
+        id: 'neg-dbl-4',
+        // ♠ K74  ♥ QJ85  ♦ AJ3  ♣ 962 → 11 HCP, 3-4-3-3 — raise 2♥ (NOT double) after 1♥-1♠
+        // HCP: KS=3,QH=2,JH=1,AD=4,JD=1 = 11. Cards: 3+4+3+3=13 ✓
+        hand: ['KS','7S','4S','QH','JH','8H','5H','AD','JD','3D','9C','6C','2C'],
+        auction: [{ player: 'Partner', bid: '1H' }, { player: 'Opp', bid: '1S' }],
+        vulnerability: 'None',
+        prompt: 'Partner opened 1♥ and RHO overcalled 1♠. You have 11 HCP with 4-card heart support (QJ85). Do you make a negative double, or is there a better bid?',
+        correctBid: '2H',
+        hint: 'A negative double over 1♠ shows SPADES (the other major) — but you have HEARTS. What do you do instead?',
+        correctExplanation: 'Raise to 2♥ — not a double! After 1♥–1♠, a double would show spades (the other major), not hearts. Since you have 4-card heart support for partner, simply raise partner\'s suit to 2♥. This shows 3+ hearts and 6–10 HCP (competitive/constructive raise). With your 11 HCP and 4-card fit, a raise to 3♥ (limit) is even stronger. Raise hearts, don\'t double!',
+      },
+    ],
+  },
+
+  {
+    id: 'jump-overcall',
+    unit: 'Competitive Bidding',
+    title: '2-Level Overcalls & Jump Overcalls',
+    description: 'A 2-level overcall shows a strong 6-card suit and 12–17 HCP — more than a 1-level overcall. A weak jump overcall (WJO) is preemptive: it shows a 6-card suit and 6–10 HCP. A strong jump overcall shows a near-game hand. A 3-level jump overcall is a preemptive disruption.',
+    convention: 'Standard American',
+    difficulty: 'Intermediate',
+    scenarios: [
+      {
+        id: 'jump-overcall-1',
+        // ♠ 74  ♥ AKQJ85  ♦ KJ3  ♣ 86 → 14 HCP, 2-6-3-2 — 2-level overcall 2♥ over 1♠
+        // HCP: AH=4,KH=3,QH=2,JH=1,KD=3,JD=1 = 14. Cards: 2+6+3+2=13 ✓
+        hand: ['7S','4S','AH','KH','QH','JH','8H','5H','KD','JD','3D','8C','6C'],
+        auction: [{ player: 'Opp', bid: '1S' }],
+        vulnerability: 'None',
+        prompt: 'RHO opened 1♠. You have 14 HCP with AKQJ85 in hearts. What do you bid?',
+        correctBid: '2H',
+        hint: 'A 2-level overcall shows 12–17 HCP and a strong 6-card suit. Do you qualify?',
+        correctExplanation: 'Overcall 2♥! With 14 HCP and a powerful 6-card heart suit (AKQJ85), a 2♥ overcall is the right call. The 2-level overcall promises a stronger hand than a 1-level overcall — roughly 12–17 HCP and a good 6-card suit. It describes your hand in one bid, suggests a heart lead, and competes for the contract at the 2-level.',
+      },
+      {
+        id: 'jump-overcall-2',
+        // ♠ KQT985  ♥ 3  ♦ J82  ♣ 764 → 6 HCP, 6-1-3-3 — weak jump overcall 2♠ over 1♥
+        // HCP: KS=3,QS=2,JD=1 = 6. Cards: 6+1+3+3=13 ✓
+        hand: ['KS','QS','TS','9S','8S','5S','3H','JD','8D','2D','7C','6C','4C'],
+        auction: [{ player: 'Opp', bid: '1H' }],
+        vulnerability: 'None',
+        prompt: 'RHO opened 1♥. You have 6 HCP with KQT985 in spades. The opponents are not vulnerable. What do you bid?',
+        correctBid: '2S',
+        hint: 'A jump overcall (skipping a level) with a 6-card suit and 6–10 HCP is preemptive. What does jumping to 2♠ accomplish?',
+        correctExplanation: 'Weak jump overcall 2♠! Jumping to 2♠ over 1♥ (skipping 1♠) is a WEAK jump overcall — preemptive, showing 6 spades and 6–10 HCP. KQT985 is a great suit for the purpose: it offers a good lead and uses up two levels of their bidding space. Non-vulnerable this is a very safe action — even down 2 undoubled (-100) beats them making 3♥ (+140).',
+      },
+      {
+        id: 'jump-overcall-3',
+        // ♠ KQT9875  ♥ 4  ♦ J62  ♣ 83 → 6 HCP, 7-1-3-2 — 3-level preemptive jump overcall 3♠ over 1♥
+        // HCP: KS=3,QS=2,JD=1 = 6. Cards: 7+1+3+2=13 ✓
+        hand: ['KS','QS','TS','9S','8S','7S','5S','4H','JD','6D','2D','8C','3C'],
+        auction: [{ player: 'Opp', bid: '1H' }],
+        vulnerability: 'None',
+        prompt: 'RHO opened 1♥. You have 6 HCP with a 7-card spade suit (KQT9875). How do you make life as difficult as possible for your opponents?',
+        correctBid: '3S',
+        hint: 'A 7-card suit lets you preempt at the 3-level. The more cards, the higher the preempt.',
+        correctExplanation: 'Jump overcall 3♠ — a 3-level preempt! With a 7-card spade suit you can jump all the way to 3♠ over 1♥. This uses up four levels of their bidding space (2♣, 2♦, 2♥, 2♠ are all gone). KQT9875 is a fine suit for the preempt. Opponents now face a blind auction starting at the 3-level — they may misjudge or miss their best contract. Rule of 2-3 applies: non-vulnerable, aim to go no more than 3 down.',
+      },
+      {
+        id: 'jump-overcall-4',
+        // ♠ J7542  ♥ Q3  ♦ K84  ♣ 962 → 6 HCP, 5-2-3-3 — PASS (suit too poor for overcall)
+        // HCP: JS=1,QH=2,KD=3 = 6. Cards: 5+2+3+3=13 ✓
+        hand: ['JS','7S','5S','4S','2S','QH','3H','KD','8D','4D','9C','6C','2C'],
+        auction: [{ player: 'Opp', bid: '1H' }],
+        vulnerability: 'Both',
+        prompt: 'RHO opened 1♥. You have 6 HCP with J7542 in spades, vulnerable. Should you overcall 1♠?',
+        correctBid: 'Pass',
+        hint: 'Vulnerable overcalls need a solid suit. J7542 is dangerous — if partner leads your suit and it isn\'t solid, you could have a big penalty.',
+        correctExplanation: 'Pass — the suit is too weak! J7542 is a dangerous overcall suit, especially vulnerable. If partner leads spades on a bad day and you\'re doubled, you could lose 800+ points. The general rule: a vulnerable overcall suit should have 2 of the top 3 honours (AK, AQ, or KQ). J7xxx fails this test. Pass and wait for a better hand — there is no shame in passing in competitive situations.',
+      },
+    ],
+  },
+
+  {
+    id: 'balancing',
+    unit: 'Competitive Bidding',
+    title: 'Balancing & Reopening',
+    description: 'In the passout seat (last chance to bid), you may act with less than normal opening values. When opponents stop low (e.g., 1♦–Pass–Pass–?), partner may have values but no good bid. Balancing double = 9+ HCP, support for unbid suits. Balancing 1NT = 12–14 HCP, balanced. Know when NOT to balance if opponents have found a fit.',
+    convention: 'Standard American',
+    difficulty: 'Advanced',
+    scenarios: [
+      {
+        id: 'balancing-1',
+        // ♠ 74  ♥ KJ85  ♦ AQ63  ♣ 952 → 10 HCP, 2-4-4-3 — balance with double (9+ HCP in passout seat)
+        // HCP: KH=3,JH=1,AD=4,QD=2 = 10. Cards: 2+4+4+3=13 ✓
+        hand: ['7S','4S','KH','JH','8H','5H','AD','QD','6D','3D','9C','5C','2C'],
+        auction: [
+          { player: 'LHO', bid: '1S' },
+          { player: 'Partner', bid: 'Pass' },
+          { player: 'RHO', bid: 'Pass' },
+        ],
+        vulnerability: 'None',
+        prompt: 'LHO opened 1♠ and it went Pass–Pass back to you. You have 10 HCP with 4 hearts, 4 diamonds, and shortage in spades. Should you balance?',
+        correctBid: 'X',
+        hint: 'In the balancing seat with shortness in their suit and support for all other suits, a reopening double is correct.',
+        correctExplanation: 'Balance with a double — a reopening takeout double! When 1♠ is passed around to you, partner may have a decent hand but no good bid over 1♠. Your shortage in spades and support for hearts, diamonds, and clubs makes a double perfect. In the balancing seat a double can be made on 9–11 HCP (lighter than an immediate double). Partner will bid their best suit — you are "protecting" them from a cheap contract.',
+      },
+      {
+        id: 'balancing-2',
+        // ♠ KJ5  ♥ AQ8  ♦ J73  ♣ KT62 → 14 HCP, 3-3-3-4 — balance with 1NT (12-14 balanced in passout)
+        // HCP: KS=3,JS=1,AH=4,QH=2,JD=1,KC=3 = 14. Cards: 3+3+3+4=13 ✓
+        hand: ['KS','JS','5S','AH','QH','8H','JD','7D','3D','KC','TC','6C','2C'],
+        auction: [
+          { player: 'LHO', bid: '1D' },
+          { player: 'Partner', bid: 'Pass' },
+          { player: 'RHO', bid: 'Pass' },
+        ],
+        vulnerability: 'None',
+        prompt: 'LHO opened 1♦ and it came back to you. You have 14 HCP, a balanced 3-3-3-4 hand with a diamond stopper (J73). What is your balancing bid?',
+        correctBid: '1N',
+        hint: 'In the balancing seat, 1NT shows a balanced hand with 12–14 HCP (slightly lighter than an opening 1NT). You also have their suit stopped.',
+        correctExplanation: 'Balance with 1NT — a balancing no-trump! In the passout seat, 1NT shows 12–14 HCP and a balanced hand with the opener\'s suit stopped. Your J73 in diamonds is a stopper and your 14 HCP balanced hand is ideal. This tells partner you have values but a flat hand. Partner can pass, transfer to a major, or invite game. Without your balance, the opponents steal the contract at the 1-level.',
+      },
+      {
+        id: 'balancing-3',
+        // ♠ 74  ♥ KJ43  ♦ Q862  ♣ A93 → 10 HCP — opponents found their fit (1♠-2♠), PASS
+        // HCP: KH=3,JH=1,QD=2,AC=4 = 10. Cards: 2+4+4+3=13 ✓
+        hand: ['7S','4S','KH','JH','4H','3H','QD','8D','6D','2D','AC','9C','3C'],
+        auction: [
+          { player: 'LHO', bid: '1S' },
+          { player: 'Partner', bid: 'Pass' },
+          { player: 'RHO', bid: '2S' },
+        ],
+        vulnerability: 'None',
+        prompt: 'LHO opened 1♠ and RHO raised to 2♠ (showing 3-card support). It is now your turn. You have 10 HCP but no spades. Should you balance?',
+        correctBid: 'Pass',
+        hint: 'Opponents have found a 8+ card trump fit. Balancing into their fit is dangerous — you have no safe exit if doubled.',
+        correctExplanation: 'Pass — do NOT balance when they have a fit! The golden rule: do NOT balance when opponents have agreed on a suit (1♠–2♠ shows an 8-card spade fit). They have a safe haven; if you balance and get doubled, you\'ll lose points. Your 10 HCP is useful, but without knowing where to play safely, it\'s too risky. Balancing is correct when opponents stop in 1-of-a-suit with no raised fit. When they have a fit, let them play.',
+      },
+      {
+        id: 'balancing-4',
+        // ♠ 3  ♥ K84  ♦ Q73  ♣ AKJ852 → 13 HCP, 1-3-3-6 — balance with 2♣ (natural in passout seat)
+        // HCP: KH=3,QD=2,AC=4,KC=3,JC=1 = 13. Cards: 1+3+3+6=13 ✓
+        hand: ['3S','KH','8H','4H','QD','7D','3D','AC','KC','JC','8C','5C','2C'],
+        auction: [
+          { player: 'LHO', bid: '1S' },
+          { player: 'Partner', bid: 'Pass' },
+          { player: 'RHO', bid: 'Pass' },
+        ],
+        vulnerability: 'None',
+        prompt: 'LHO opened 1♠ and it came back to you. You have 13 HCP with a powerful 6-card club suit (AKJ852) and a singleton spade. What do you do?',
+        correctBid: '2C',
+        hint: 'In the balancing seat, you can show your natural long suit. A 2♣ bid is natural and shows clubs.',
+        correctExplanation: 'Balance with 2♣ — showing your club suit! In the passout seat, a 2♣ bid is natural showing a long club suit and values (roughly 11+ HCP). With AKJ852 (a near-self-sufficient suit) and 13 HCP, this is an easy decision. Partner knows you have clubs and can support or bid their own suit. Letting the opponents play 1♠ when you have 13 HCP and a powerful suit is giving away free IMPs.',
+      },
+    ],
+  },
+
   // ── UNIT 5: Slam Bidding ──────────────────────────────────────────────────
   {
     id: 'blackwood',

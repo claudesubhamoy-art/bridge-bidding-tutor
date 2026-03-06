@@ -515,6 +515,391 @@ export const LESSONS = [
     ],
   },
 
+  {
+    id: 'rkcb',
+    unit: 'Slam Bidding',
+    title: 'Roman Keycard Blackwood (RKCB)',
+    description: 'RKCB treats the trump King as a 5th "ace" (keycard). 4NT asks for keycards. Responses (1430): 5♣ = 1 or 4, 5♦ = 0 or 3, 5♥ = 2 without the trump Queen, 5♠ = 2 with the trump Queen.',
+    convention: 'Roman Keycard Blackwood',
+    difficulty: 'Advanced',
+    scenarios: [
+      {
+        id: 'rkcb-1',
+        // ♠ AKJ82  ♥ AQ94  ♦ K7  ♣ 85 → 17 HCP, 5-4-2-2 — spades agreed, use RKCB
+        // HCP: AS=4,KS=3,JS=1,AH=4,QH=2,KD=3 = 17. Cards: 5+4+2+2=13 ✓
+        hand: ['AS','KS','JS','8S','2S','AH','QH','9H','4H','KD','7D','8C','5C'],
+        auction: [
+          { player: 'Partner', bid: '1S' },
+          { player: 'You', bid: '2H' },
+          { player: 'Partner', bid: '3S' },
+        ],
+        vulnerability: 'Both',
+        prompt: 'Spades agreed, partner jump-rebid 3♠ (16+ HCP). You have 17 HCP and 2 aces. What do you bid to ask for keycards?',
+        correctBid: '4N',
+        hint: 'RKCB is still invoked with 4NT — the difference is in how partner responds.',
+        correctExplanation: 'Bid 4NT (RKCB)! With 17 HCP facing 16+ HCP from partner, slam is very likely — you just need to confirm keycards (the 4 aces + ♠K). RKCB gives more precise information than standard Blackwood because it includes the trump King. After the response you will know exactly how many of the 5 keycards partner holds.',
+      },
+      {
+        id: 'rkcb-2',
+        // Partner responded 5♣ to RKCB = 1 or 4 keycards. You hold AS + AH = 2 keycards.
+        // Combined = 3 (if partner has 1) or 6 (impossible). So partner has 1 keycard.
+        // Missing 2 keycards → sign off in 5♠
+        // ♠ AKJ82  ♥ AQ94  ♦ K7  ♣ 85 same hand
+        hand: ['AS','KS','JS','8S','2S','AH','QH','9H','4H','KD','7D','8C','5C'],
+        auction: [
+          { player: 'Partner', bid: '1S' },
+          { player: 'You', bid: '2H' },
+          { player: 'Partner', bid: '3S' },
+          { player: 'You', bid: '4N' },
+          { player: 'Partner', bid: '5C' },
+        ],
+        vulnerability: 'Both',
+        prompt: 'Partner responded 5♣ to RKCB (1 or 4 keycards). You hold 2 keycards (♠A and ♥A). Combined = 3. Is slam safe?',
+        correctBid: '5S',
+        hint: 'You have 2 keycards. Partner has 1. That means you are missing 2 of the 5 keycards. What do you do?',
+        correctExplanation: 'Sign off in 5♠. You hold 2 keycards + partner has 1 = only 3 of 5 keycards. You are missing 2 (♠K and one ace) — slam is far too dangerous. Bid 5♠ to play in game. Never bid a small slam missing 2 keycards. This is exactly why RKCB is so valuable — it prevents expensive slams off two controls.',
+      },
+      {
+        id: 'rkcb-3',
+        // Partner responded 5♦ to RKCB = 0 or 3 keycards. You have 2. Combined = 5 (all!).
+        // Bid 6♠ — all keycards present.
+        // ♠ AKJ82  ♥ AQ94  ♦ K7  ♣ 85 same hand
+        hand: ['AS','KS','JS','8S','2S','AH','QH','9H','4H','KD','7D','8C','5C'],
+        auction: [
+          { player: 'Partner', bid: '1S' },
+          { player: 'You', bid: '2H' },
+          { player: 'Partner', bid: '3S' },
+          { player: 'You', bid: '4N' },
+          { player: 'Partner', bid: '5D' },
+        ],
+        vulnerability: 'Both',
+        prompt: 'Partner responded 5♦ to RKCB (0 or 3 keycards). You hold 2 keycards. Combined = 2 or 5. Which is it, and what do you bid?',
+        correctBid: '6S',
+        hint: 'Partner cannot have 0 keycards — they opened the bidding. So they must have 3.',
+        correctExplanation: 'Bid 6♠! Partner opened and then jump-rebid 3♠ showing 16+ HCP — having 0 keycards is impossible. Partner must have 3 keycards. 2 + 3 = all 5 keycards accounted for. Small slam is safe — bid 6♠. With all 5 keycards you could even investigate a grand slam by bidding 5NT, but 6♠ is excellent here.',
+      },
+      {
+        id: 'rkcb-4',
+        // After RKCB, partner shows 2 keycards WITH the trump Queen (5♠).
+        // You have 2 keycards = 4 total. All keycards. Strong hand → bid 7♠?
+        // ♠ AKQT5  ♥ AK93  ♦ A7  ♣ 85 → 20 HCP, 5-4-2-2
+        // HCP: AS=4,KS=3,QS=2,AH=4,KH=3,AD=4 = 20. Cards: 5+4+2+2=13 ✓
+        hand: ['AS','KS','QS','TS','5S','AH','KH','9H','3H','AD','7D','8C','5C'],
+        auction: [
+          { player: 'Partner', bid: '2S' },
+          { player: 'You', bid: '4N' },
+          { player: 'Partner', bid: '5S' },
+        ],
+        vulnerability: 'None',
+        prompt: 'Partner opened a weak 2♠ (6-card suit, 6–10 HCP). You bid RKCB. Partner shows 2 keycards WITH the ♠Q (5♠). What do you bid?',
+        correctBid: '7S',
+        hint: 'You have 3 keycards. Partner has 2 + the trump Queen. That is all 5 keycards plus the trump Queen. How many tricks can you count?',
+        correctExplanation: 'Bid 7♠ (grand slam)! You have 3 keycards (♠A, ♥A, ♦A). Partner has 2 keycards + ♠Q. All 5 keycards plus the trump Queen — no losers in trumps or aces. Your 20 HCP + partner\'s 6–10 HCP = enormous playing strength with at least 11 combined trumps. Count the tricks: ♠♠♠♠♠♠ + ♥♥♥♥ + ♦♦♦ = 13 tricks easily. Go for the grand!',
+      },
+    ],
+  },
+
+  {
+    id: 'cue-bids',
+    unit: 'Slam Bidding',
+    title: 'Control-Showing Cue Bids',
+    description: 'After a trump suit is agreed, bids below game show a "control" (ace or void = 1st round; king or singleton = 2nd round) in that suit. Cue bids explore slam without committing prematurely. Always cue-bid the cheapest control first.',
+    convention: 'Cue Bids',
+    difficulty: 'Advanced',
+    scenarios: [
+      {
+        id: 'cue-1',
+        // ♠ AKJ95  ♥ KQ6  ♦ A84  ♣ 73 → 17 HCP, 5-3-3-2 — partner raises to 3♠, cue-bid 4♦
+        // HCP: AS=4,KS=3,JS=1,KH=3,QH=2,AD=4 = 17. Cards: 5+3+3+2=13 ✓
+        hand: ['AS','KS','JS','9S','5S','KH','QH','6H','AD','8D','4D','7C','3C'],
+        auction: [
+          { player: 'You', bid: '1S' },
+          { player: 'Partner', bid: '3S' },
+        ],
+        vulnerability: 'None',
+        prompt: 'You opened 1♠. Partner limit-raised to 3♠ (10–12 HCP). You have 17 HCP with the ♠A, ♥K, ♦A. You want to investigate slam. What do you bid?',
+        correctBid: '4D',
+        hint: 'You have too much to just bid 4♠. Show your cheapest first-round control (ace or void) below game.',
+        correctExplanation: 'Cue-bid 4♦! With 17 HCP facing a limit raise you have slam interest. Rather than asking for aces blindly with 4NT, show your ♦A with 4♦ — a control-showing cue bid. This tells partner "I want to investigate slam and I control diamonds." Partner will now cue-bid their cheapest control (♣A → 4♣ area, ♥A → 4♥, etc.) or sign off in 4♠ with no slam interest.',
+      },
+      {
+        id: 'cue-2',
+        // Partner cue-bid 4♥ (showing ♥A or void). You hold ♣A too. Cue-bid 4♣ is below 4♦ so wrong order.
+        // Actually: auction is 1♠-3♠-4♦(you)-4♥(partner). Now you hold ♣A. Bid 4NT (Blackwood/RKCB) now.
+        // ♠ AKJ95  ♥ KQ6  ♦ A84  ♣ 73 same hand
+        hand: ['AS','KS','JS','9S','5S','KH','QH','6H','AD','8D','4D','7C','3C'],
+        auction: [
+          { player: 'You', bid: '1S' },
+          { player: 'Partner', bid: '3S' },
+          { player: 'You', bid: '4D' },
+          { player: 'Partner', bid: '4H' },
+        ],
+        vulnerability: 'None',
+        prompt: 'You cue-bid 4♦ (♦A). Partner cue-bid 4♥ (♥A). You now know partner controls hearts and diamonds. What do you bid next?',
+        correctBid: '4N',
+        hint: 'You know partner has the ♥A. You have the ♦A and ♠A. Should you now count aces precisely with Blackwood?',
+        correctExplanation: 'Bid 4NT (RKCB)! The cue-bidding exchange confirmed partner has the ♥A (or void). Now use RKCB to count keycards precisely. You know ♦ and ♥ are controlled — you just need to confirm no missing ace or the ♠K. Cue bids and Blackwood work together: cue bids locate specific controls, then RKCB counts all keycards before committing to slam.',
+      },
+      {
+        id: 'cue-3',
+        // ♠ KQT84  ♥ AKJ  ♦ K93  ♣ 76 → 17 HCP, 5-3-3-2
+        // HCP: KS=3,QS=2,AH=4,KH=3,JH=1,KD=3 = 16. Cards: 5+3+3+2=13 ✓
+        // Partner raised to 3♠. Opponent cue-bid sequence. You have no ♣ control — sign off.
+        hand: ['KS','QS','TS','8S','4S','AH','KH','JH','KD','9D','3D','7C','6C'],
+        auction: [
+          { player: 'You', bid: '1S' },
+          { player: 'Partner', bid: '3S' },
+          { player: 'You', bid: '4H' },
+          { player: 'Partner', bid: '5C' },
+        ],
+        vulnerability: 'Both',
+        prompt: 'You cue-bid 4♥ (♥A). Partner cue-bid 5♣ (♣A). You have NO club control and NO diamond ace. What do you bid?',
+        correctBid: '5S',
+        hint: 'Partner skipped over 4♠ to show the ♣A — this is past game. But you are missing the ♦A and ♣K. Is slam safe?',
+        correctExplanation: 'Sign off in 5♠! Partner\'s 5♣ cue bid is past game, showing the ♣A and slam interest. But you have no ♦A or ♦ control — the opponents can cash the ♦A immediately against a slam. Bid 5♠ to play in game. This is the key lesson of cue bidding: if you cannot cue-bid past a critical suit (diamonds here), you show it by signing off rather than bidding a slam you cannot make.',
+      },
+      {
+        id: 'cue-4',
+        // ♠ AQJ73  ♥ void  ♦ AKQ82  ♣ K65 → 18 HCP + void, 5-0-5-3
+        // HCP: AS=4,QS=2,JS=1,AD=4,KD=3,QD=2,KC=3 = 19. Cards: 5+0+5+3=13 ✓
+        // Show void with a cue bid above 4NT level
+        hand: ['AS','QS','JS','7S','3S','AD','KD','QD','8D','2D','KC','6C','5C'],
+        auction: [
+          { player: 'Partner', bid: '1S' },
+          { player: 'You', bid: '2D' },
+          { player: 'Partner', bid: '4S' },
+        ],
+        vulnerability: 'None',
+        prompt: 'Partner jumped to 4♠ (game values + good spades). You have 19 HCP, ♥ void, and controls everywhere. What is your slam move?',
+        correctBid: '4N',
+        hint: 'With 19 HCP, two aces, a void and a solid 5-card diamond suit, you have far more than partner expects. How do you check for keycards?',
+        correctExplanation: 'Bid 4NT (RKCB)! With 19 HCP and a heart void your hand is enormously powerful. Use RKCB to count keycards before committing to 6♠ or even 7♠. Your void in hearts means you are not worried about heart losers — you just need partner to have the ♠K (a keycard) to make slam virtually certain. After RKCB you can place the final contract precisely.',
+      },
+    ],
+  },
+
+  {
+    id: 'grand-slam',
+    unit: 'Slam Bidding',
+    title: 'Grand Slam Bidding',
+    description: 'A grand slam (7-level) scores a massive bonus but requires 13 tricks — all four aces plus the trump King and Queen. Use 5NT (pick-a-slam / grand slam force) or continued cue bids after confirming all keycards.',
+    convention: 'Grand Slam Force / 5NT',
+    difficulty: 'Advanced',
+    scenarios: [
+      {
+        id: 'grand-1',
+        // ♠ AKQ95  ♥ AKQ  ♦ AK8  ♣ 73 → 25 HCP, 5-3-3-2
+        // HCP: AS=4,KS=3,QS=2,AH=4,KH=3,QH=2,AD=4,KD=3 = 25. Cards: 5+3+3+2=13 ✓
+        // After RKCB partner shows all 5 keycards → bid 7♠
+        hand: ['AS','KS','QS','9S','5S','AH','KH','QH','AD','KD','8D','7C','3C'],
+        auction: [
+          { player: 'You', bid: '2C' },
+          { player: 'Partner', bid: '2D' },
+          { player: 'You', bid: '2S' },
+          { player: 'Partner', bid: '3S' },
+          { player: 'You', bid: '4N' },
+          { player: 'Partner', bid: '5H' },
+        ],
+        vulnerability: 'Both',
+        prompt: 'You opened 2♣, partner raised spades. RKCB (4NT) → partner shows 2 keycards (5♥). You hold 3 keycards. All 5 keycards accounted for. What do you bid?',
+        correctBid: '7S',
+        hint: '2 + 3 = 5 keycards. You have all the aces and the trump King. Can you count 13 tricks?',
+        correctExplanation: 'Bid 7♠ (grand slam)! All 5 keycards are present. Count your tricks: ♠AKQxx (5) + ♥AKQ (3) + ♦AK (2) = 10 top tricks in your hand alone, plus partner\'s spades and entries = 13 easily. When you have a 25 HCP powerhouse, all keycards accounted for, and a solid trump suit — bid the grand slam! The grand slam bonus at both vulnerable is enormous.',
+      },
+      {
+        id: 'grand-2',
+        // 5NT = pick-a-slam / grand slam try — asks partner to bid 7 of their best suit with top 2 trump honors
+        // ♠ AKJ96  ♥ AKJ  ♦ AK5  ♣ 84 → 22 HCP, 5-3-3-2
+        // HCP: AS=4,KS=3,JS=1,AH=4,KH=3,JH=1,AD=4,KD=3 = 23. Cards: 5+3+3+2=13 ✓
+        hand: ['AS','KS','JS','9S','6S','AH','KH','JH','AD','KD','5D','8C','4C'],
+        auction: [
+          { player: 'Partner', bid: '1S' },
+          { player: 'You', bid: '2D' },
+          { player: 'Partner', bid: '3S' },
+          { player: 'You', bid: '4N' },
+          { player: 'Partner', bid: '5D' },
+        ],
+        vulnerability: 'None',
+        prompt: 'RKCB shows partner has 3 keycards (5♦). You have 2. All 5 keycards present. You want to check if partner has the ♠Q for a grand slam. What do you bid?',
+        correctBid: '5N',
+        hint: 'After confirming all 5 keycards, 5NT asks a specific question. What does it ask?',
+        correctExplanation: 'Bid 5NT! After all 5 keycards are confirmed, 5NT is the "grand slam try" — it asks partner to bid 7♠ if they hold the ♠Q (trump Queen), or sign off in 6♠ without it. With 23 HCP + partner\'s opening values and all keycards, the only missing piece is the ♠Q. If partner bids 7♠ you play it confidently; if 6♠, you accept. 5NT is the precise surgical tool for this situation.',
+      },
+      {
+        id: 'grand-3',
+        // When NOT to bid a grand slam — missing trump Queen, wrong to bid 7
+        // ♠ AKJT5  ♥ AKQ  ♦ AQ6  ♣ 84 → 22 HCP, 5-3-3-2
+        // HCP: AS=4,KS=3,JS=1,AH=4,KH=3,QH=2,AD=4,QD=2 = 23. Cards: 5+3+3+2=13 ✓
+        hand: ['AS','KS','JS','TS','5S','AH','KH','QH','AD','QD','6D','8C','4C'],
+        auction: [
+          { player: 'Partner', bid: '1S' },
+          { player: 'You', bid: '2H' },
+          { player: 'Partner', bid: '3S' },
+          { player: 'You', bid: '4N' },
+          { player: 'Partner', bid: '5C' },
+        ],
+        vulnerability: 'Both',
+        prompt: 'RKCB shows partner has 1 keycard (5♣). You have 3 keycards. Total = 4 of 5 keycards — missing the ♠Q (5th keycard). Vulnerable. What do you bid?',
+        correctBid: '6S',
+        hint: 'You have 4 of 5 keycards. The missing keycard is the ♠Q. Is a grand slam safe?',
+        correctExplanation: 'Bid 6♠, not 7♠. You are missing the ♠Q (the 5th keycard in RKCB). Without the trump Queen, you likely have a trump loser — making 7♠ very risky, especially vulnerable where going one down costs you the slam bonus AND the game bonus. Settle for 6♠ which should be cold. Never bid a grand slam with a potential trump loser unless you have enough side entries to discard any losers.',
+      },
+      {
+        id: 'grand-4',
+        // Quantitative raise: 4NT after 1NT/2NT = asking for slam in NT, not Blackwood
+        // ♠ KQ6  ♥ AJ9  ♦ KQ84  ♣ KJ7 → 19 HCP, 3-3-4-3
+        // HCP: KS=3,QS=2,AH=4,JH=1,KD=3,QD=2,KC=3,JC=1 = 19. Cards: 3+3+4+3=13 ✓
+        hand: ['KS','QS','6S','AH','JH','9H','KD','QD','8D','4D','KC','JC','7C'],
+        auction: [{ player: 'Partner', bid: '2N' }],
+        vulnerability: 'None',
+        prompt: 'Partner opened 2NT (20–21 HCP). You have 19 HCP balanced. What do you bid to invite a grand slam in NT?',
+        correctBid: '4N',
+        hint: 'After a 2NT opening, 4NT is NOT Blackwood — it is quantitative. What does it mean here?',
+        correctExplanation: 'Bid 4NT (quantitative raise)! After a 2NT opening, 4NT is a quantitative (invitational) raise — it says "Partner, if you are maximum (21 HCP), bid 7NT; if minimum (20 HCP), pass and play 4NT." Your 19 HCP + partner\'s 20–21 = 39–40 HCP total, enough for 7NT if the fits are right. This is completely different from Blackwood — context determines meaning!',
+      },
+    ],
+  },
+
+  {
+    id: 'splinter-bids',
+    unit: 'Slam Bidding',
+    title: 'Splinter Bids',
+    description: 'A splinter is a double-jump in a new suit showing: (1) trump fit, (2) game-forcing values (13+ HCP), and (3) a singleton or void in the splinter suit. It helps partner evaluate whether their values are "working" or "wasted".',
+    convention: 'Splinter Bids',
+    difficulty: 'Advanced',
+    scenarios: [
+      {
+        id: 'splinter-1',
+        // ♠ AK975  ♥ KQ84  ♦ A62  ♣ 3 → 17 HCP, 5-4-3-1
+        // HCP: AS=4,KS=3,AH=0... wait: AS=4,KS=3,KH=3,QH=2,AD=4 = 16. Cards: 5+4+3+1=13 ✓
+        // Splinter: 4♣ after partner opens 1♠ = spade fit + singleton club + game values
+        hand: ['AS','KS','9S','7S','5S','KH','QH','8H','4H','AD','6D','2D','3C'],
+        auction: [{ player: 'Partner', bid: '1H' }],
+        vulnerability: 'None',
+        prompt: 'Partner opened 1♥. You have 4-card heart support, 16 HCP, and a singleton club. How do you show a forcing raise with a club shortage?',
+        correctBid: '4C',
+        hint: 'A double jump in a new suit (1♥ → 4♣ skips 2♣ and 3♣) shows a splinter — fit + shortage + game values.',
+        correctExplanation: 'Bid 4♣ (splinter)! A double jump to 4♣ shows: 4-card heart support, 13+ HCP, and a singleton or void in clubs. This is far more informative than a direct 4♥ raise. Partner can now evaluate whether their club values are "working" (e.g. ♣A is wasted opposite your void/singleton) or if they hold a "working" hand with club shortness too → potential slam!',
+      },
+      {
+        id: 'splinter-2',
+        // Partner splinters 4♦ after your 1♠ opening → evaluate your diamond holding
+        // ♠ KQJ85  ♥ AK6  ♦ Q97  ♣ K4 → 18 HCP — you have ♦Q97 = wasted values opposite partner's singleton
+        // HCP: KS=3,QS=2,JS=1,AH=4,KH=3,QD=2,KC=3 = 18. Cards: 5+3+3+2=13 ✓
+        hand: ['KS','QS','JS','8S','5S','AH','KH','6H','QD','9D','7D','KC','4C'],
+        auction: [
+          { player: 'You', bid: '1S' },
+          { player: 'Partner', bid: '4D' },
+        ],
+        vulnerability: 'None',
+        prompt: 'You opened 1♠. Partner splinters 4♦ (spade fit + singleton/void diamond + 13+ HCP). You hold ♦Q97. What do you bid?',
+        correctBid: '4S',
+        hint: 'Partner has at most 1 diamond. Your ♦Q97 = 2 HCP that will be completely wasted. How does that affect your slam prospects?',
+        correctExplanation: 'Sign off in 4♠. Your ♦Q97 (2 HCP) is "wasted" — partner\'s singleton/void means those values contribute nothing. Effectively you have only 16 working HCP. With wasted values opposite a splinter, sign off in game. If instead you held ♦2 (no wasted values), or your honours were in the other suits, slam would be very attractive. Splinters let you make this judgment immediately.',
+      },
+      {
+        id: 'splinter-3',
+        // Same situation but now opener has NO wasted values in the splinter suit → drive to slam
+        // ♠ AQJ85  ♥ AK6  ♦ 3  ♣ KJ74 → 18 HCP, 5-3-1-4
+        // HCP: AS=4,QS=2,JS=1,AH=4,KH=3,KC=3,JC=1 = 18. Cards: 5+3+1+4=13 ✓
+        hand: ['AS','QS','JS','8S','5S','AH','KH','6H','3D','KC','JC','7C','4C'],
+        auction: [
+          { player: 'You', bid: '1S' },
+          { player: 'Partner', bid: '4D' },
+        ],
+        vulnerability: 'None',
+        prompt: 'You opened 1♠. Partner splinters 4♦ (singleton/void diamond). This time you hold only ♦3 (a singleton too!). What do you bid?',
+        correctBid: '4N',
+        hint: 'You have a diamond singleton to match partner\'s! All your 18 HCP are in the "working" suits. What does that mean for slam?',
+        correctExplanation: 'Bid 4NT (RKCB)! You have a diamond singleton — partner\'s splinter is music to your ears. All 18 of your HCP are in spades, hearts, and clubs where they are fully working. With 18 working HCP facing partner\'s 13+ working HCP + a fit, slam is almost certain. Use RKCB to confirm keycards before bidding 6♠. This is the power of splinters: they let you upgrade or downgrade your hand instantly.',
+      },
+      {
+        id: 'splinter-4',
+        // Identify a splinter bid in a competitive auction
+        // ♠ 6  ♥ AKJ84  ♦ KQ93  ♣ AJ5 → 19 HCP, 1-5-4-3
+        // HCP: AH=4,KH=3,JH=1,KD=3,QD=2,AC=4,JC=1 = 18. Cards: 1+5+4+3=13 ✓
+        hand: ['6S','AH','KH','JH','8H','4H','KD','QD','9D','3D','AC','JC','5C'],
+        auction: [{ player: 'Partner', bid: '1H' }],
+        vulnerability: 'None',
+        prompt: 'Partner opened 1♥. You have 5-card heart support, 18 HCP, and a spade singleton. What is the most descriptive bid?',
+        correctBid: '3S',
+        hint: 'A double jump in spades (1♥ → 3♠, skipping 2♠) shows a splinter with heart support.',
+        correctExplanation: 'Bid 3♠ (splinter)! A double jump to 3♠ shows 4+ heart support, 13+ HCP, and a singleton or void in spades. Note that after a 1♥ opening, 2♠ is a natural response and 4♠ would be past game — so 3♠ is the splinter. This lets partner immediately know you have a huge fit, game-forcing values, and no wasted values in spades. If partner holds ♠AK, they know those are wasted and will sign off. If partner holds ♠xx, slam is very likely.',
+      },
+    ],
+  },
+
+  {
+    id: 'slam-without-bw',
+    unit: 'Slam Bidding',
+    title: 'Bidding Slam Without Blackwood',
+    description: 'Sometimes you can count 12 or 13 tricks directly — no need for Blackwood. Recognise when a hand is so powerful that you can simply place the contract, or when Blackwood is actually dangerous (void hands, suit quality issues).',
+    convention: 'Judgment / Direct Slam Bids',
+    difficulty: 'Advanced',
+    scenarios: [
+      {
+        id: 'slam-direct-1',
+        // ♠ AKQ  ♥ AKQ  ♦ AKQJ  ♣ AK2 → 37 HCP — just bid 7NT
+        // HCP: 4+3+2+4+3+2+4+3+2+1+4+3 = 35. Cards: 3+3+4+3=13 ✓
+        // AS=4,KS=3,QS=2,AH=4,KH=3,QH=2,AD=4,KD=3,QD=2,JD=1,AC=4,KC=3 = 35 HCP
+        hand: ['AS','KS','QS','AH','KH','QH','AD','KD','QD','JD','AC','KC','2C'],
+        auction: [],
+        vulnerability: 'Both',
+        prompt: 'You are dealer. Count your tricks. Do you need to ask for aces?',
+        correctBid: '7N',
+        hint: 'Count your top tricks before reaching for Blackwood.',
+        correctExplanation: 'Bid 7NT directly! You have 35 HCP and 13 top tricks: ♠AKQ (3) + ♥AKQ (3) + ♦AKQJ (4) + ♣AK (2) = 12 tricks, plus the ♣2 is a 13th trick when clubs split. There is no need for Blackwood — you can see all 13 tricks in your own hand. Sometimes the right bid is simply the final contract.',
+      },
+      {
+        id: 'slam-direct-2',
+        // When Blackwood is DANGEROUS: void in a suit means you may get a misleading response
+        // ♠ AKJ85  ♥ AKQ94  ♦ void  ♣ K6 → 19 HCP, 5-5-0-2
+        // HCP: AS=4,KS=3,JS=1,AH=4,KH=3,QH=2,KC=3 = 20. Cards: 5+5+0+2=13 ✓
+        hand: ['AS','KS','JS','8S','5S','AH','KH','QH','9H','4H','KC','6C','3C'],
+        auction: [
+          { player: 'Partner', bid: '1S' },
+          { player: 'You', bid: '2H' },
+          { player: 'Partner', bid: '3H' },
+        ],
+        vulnerability: 'None',
+        prompt: 'Partner raised your hearts (3♥). You have 20 HCP, 5-5 in the majors, ♦ void. You want to reach 6♥. Which is better: 4NT Blackwood or a direct 4♦ cue bid?',
+        correctBid: '4D',
+        hint: 'Blackwood is dangerous with a void — if partner shows 1 ace you cannot tell if it is the ♦A (useless) or a useful ace. What should you do instead?',
+        correctExplanation: 'Cue-bid 4♦! Blackwood is dangerous with a void — if partner responds 5♦ (1 ace), you cannot tell if it\'s the ♦A (worthless facing your void) or the ♣A (crucial). Instead, cue-bid 4♦ showing your diamond void / first-round control. Partner can now cue-bid their controls, and you will be able to place the slam contract without the ambiguity Blackwood creates with a void.',
+      },
+      {
+        id: 'slam-direct-3',
+        // Count winners and bid slam directly — no need for Blackwood
+        // ♠ KQJ  ♥ AKQ987  ♦ AK  ♣ 65 → 22 HCP, 3-6-2-2
+        // HCP: KS=3,QS=2,JS=1,AH=4,KH=3,QH=2,AD=4,KD=3 = 22. Cards: 3+6+2+2=13 ✓
+        hand: ['KS','QS','JS','AH','KH','QH','9H','8H','7H','AD','KD','6C','5C'],
+        auction: [
+          { player: 'Partner', bid: '1H' },
+          { player: 'You', bid: '2D' },
+          { player: 'Partner', bid: '3H' },
+        ],
+        vulnerability: 'None',
+        prompt: 'Partner confirmed a heart fit (3♥). You have 22 HCP, solid 6-card heart suit, ♦AK. Can you count 12 tricks?',
+        correctBid: '6H',
+        hint: 'Count your tricks: ♥AKQxxx + ♦AK + ♠KQJ. Do you need to ask for aces, or can you just bid the slam?',
+        correctExplanation: 'Bid 6♥ directly! Count your tricks: ♥AKQxxx = 6 tricks (solid suit), ♦AK = 2, ♠KQJ = likely 2–3 tricks. That is 10–11 tricks in your hand, and partner opened with 13+ HCP adding at least 2 more. 12 tricks are clearly available. Blackwood is unnecessary when you can count the tricks — using it wastes bidding space and reveals information to the opponents. Just bid the slam.',
+      },
+      {
+        id: 'slam-direct-4',
+        // Quantitative 4NT after 1NT — not Blackwood, slam invite in NT
+        // ♠ KQ6  ♥ KJ9  ♦ AQ84  ♣ KJ7 → 18 HCP, 3-3-4-3
+        // HCP: KS=3,QS=2,KH=3,JH=1,AD=4,QD=2,KC=3,JC=1 = 19. Cards: 3+3+4+3=13 ✓
+        hand: ['KS','QS','6S','KH','JH','9H','AD','QD','8D','4D','KC','JC','7C'],
+        auction: [{ player: 'Partner', bid: '1N' }],
+        vulnerability: 'None',
+        prompt: 'Partner opened 1NT (15–17 HCP). You have 19 HCP balanced. What do you bid to invite a small slam in NT?',
+        correctBid: '4N',
+        hint: 'After a 1NT opening, 4NT is quantitative (not Blackwood). It invites partner to bid 6NT with a maximum.',
+        correctExplanation: 'Bid 4NT (quantitative raise)! After a 1NT opening with no agreed suit, 4NT is NOT Blackwood — it is a quantitative slam invitation. It says: "Partner, if you are maximum (17 HCP), bid 6NT; if minimum (15 HCP), pass." Your 19 HCP + partner\'s 15–17 = 34–36 HCP total. With 33+ HCP and flat shape, 6NT is normally makeable. Partner decides based on their exact strength.',
+      },
+    ],
+  },
+
   // ── UNIT 6: Strong 2♣ Opening ─────────────────────────────────────────────
   {
     id: 'open-2c',

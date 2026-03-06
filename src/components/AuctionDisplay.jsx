@@ -1,3 +1,4 @@
+import React from 'react';
 import { formatAuctionBid, getSuitColor, SUIT_SYMBOLS } from '../utils/bridgeUtils.js';
 
 const PLAYERS = ['West', 'North', 'East', 'South'];
@@ -54,9 +55,8 @@ export default function AuctionDisplay({ auction, yourSeat = 'South', pendingBid
         <div style={styles.colHeader}>Bid</div>
         {/* Entries */}
         {entries.map((entry, i) => (
-          <>
+          <React.Fragment key={i}>
             <div
-              key={`p-${i}`}
               style={{
                 ...styles.cell,
                 ...styles.playerCell,
@@ -67,7 +67,6 @@ export default function AuctionDisplay({ auction, yourSeat = 'South', pendingBid
               {entry.player}
             </div>
             <div
-              key={`b-${i}`}
               style={{
                 ...styles.cell,
                 ...styles.bidCell,
@@ -77,7 +76,7 @@ export default function AuctionDisplay({ auction, yourSeat = 'South', pendingBid
             >
               {entry.bid ? colorBid(entry.bid) : '?'}
             </div>
-          </>
+          </React.Fragment>
         ))}
       </div>
     </div>

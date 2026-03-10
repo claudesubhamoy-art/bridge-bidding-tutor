@@ -52,6 +52,16 @@ export default function LessonSelector({ onSelectLesson, progress, getLessonStat
                       </div>
                     </div>
                     <div style={styles.lessonDesc}>{lesson.description}</div>
+                    {lesson.goal && (
+                      <div style={styles.lessonGoal}>
+                        <span style={styles.goalLabel}>Goal: </span>{lesson.goal}
+                      </div>
+                    )}
+                    {lesson.strategy && (
+                      <div style={styles.lessonStrategy}>
+                        <span style={styles.strategyLabel}>Strategy: </span>{lesson.strategy}
+                      </div>
+                    )}
                     <div style={styles.lessonFooter}>
                       <div style={styles.convention}>{lesson.convention}</div>
                       <div style={styles.progress}>
@@ -168,6 +178,31 @@ const styles = {
     fontSize: '0.82rem',
     color: 'rgba(240,234,214,0.65)',
     lineHeight: 1.5,
+  },
+  lessonGoal: {
+    fontSize: '0.78rem',
+    color: 'rgba(200,168,75,0.85)',
+    lineHeight: 1.4,
+    marginTop: 2,
+  },
+  goalLabel: {
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
+    fontSize: '0.65rem',
+    letterSpacing: '0.06em',
+  },
+  lessonStrategy: {
+    fontSize: '0.78rem',
+    color: 'rgba(240,234,214,0.55)',
+    lineHeight: 1.4,
+    fontStyle: 'italic',
+  },
+  strategyLabel: {
+    fontWeight: 'bold',
+    fontStyle: 'normal',
+    textTransform: 'uppercase',
+    fontSize: '0.65rem',
+    letterSpacing: '0.06em',
   },
   lessonFooter: {
     display: 'flex',
